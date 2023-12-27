@@ -14,8 +14,8 @@ public class EmailSendService {
     public Response sendEmail(){
         new SendMailForm();
         SendMailForm form = SendMailForm.builder()
-                .from("Excited User <mailgun@sandbox89c53acbe15f405796c2ef57f00d15e9.mailgun.org>")
-                .to("jrnecki81@gmail.com")
+                .from("zerobase-test@Email.com")
+                .to("jellyjelly111@naver.com")
                 .subject("test email from cms")
                 .text("my test")
                 .build();
