@@ -1,4 +1,4 @@
-package com.example.cms.user.client.config;
+package com.example.cms.user.config;
 
 import feign.auth.BasicAuthRequestInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
