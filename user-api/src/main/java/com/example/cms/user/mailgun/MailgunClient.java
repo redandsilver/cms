@@ -1,6 +1,5 @@
-package com.example.cms.user.client.mailgun;
+package com.example.cms.user.mailgun;
 
-import com.example.cms.user.client.mailgun.SendMailForm;
 import feign.Response;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;

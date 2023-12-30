@@ -1,4 +1,4 @@
-package com.example.cms.user.client.domain;
+package com.example.cms.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
