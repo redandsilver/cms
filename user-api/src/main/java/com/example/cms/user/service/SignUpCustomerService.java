@@ -32,7 +32,7 @@ public class SignUpCustomerService {
         Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(()-> new CustomException(ErrorCode.NOT_EXIST_USER));
 
-        if(customer.isVerify() == UserStatus.VERIFIED){
+        if(customer.isVerify()){
             throw new CustomException(ErrorCode.ALREADY_VERIFIED);
         }
         else if(!customer.getVerificationCode().equals(code)){
