@@ -7,14 +7,15 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class JwtAuthenticationProvider {
-    private final String secretKey="secretkey";
-    private final long tokenValidTime = 1000L * 60 * 60 *24;
-
+    @Value("{secret.key}")
+    private  String secretKey;
+    private static final long tokenValidTime = 1000L * 60 * 60 *24;
     public  String createToken(String userPk, Long id, UserType userType){
         Claims claims = Jwts.claims()
                 .setSubject(Aes256Util.encrypt(userPk))
@@ -25,7 +26,7 @@ public class JwtAuthenticationProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime()+tokenValidTime))
-                .signWith(SignatureAlgorithm.HS256,secretKey)
+                .signWith(SignatureAlgorithm.HS256,this.secretKey)
                 .compact();
     }
     public boolean validateToken(String jwtToken){

@@ -1,5 +1,7 @@
 package com.example.domain.util;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,7 +10,7 @@ import java.util.Base64;
 
 public class Aes256Util {
     public static String alg = "AES/CBC/PKCS5Padding";
-    private static final String KEY = "ZEROBASEKEYISZEROBASEKEY";
+    private static final String KEY = "REDANDSILVERISREDANDSILV";
     private static final String IV = KEY.substring(0,16);
 
     public static String encrypt(String text){
