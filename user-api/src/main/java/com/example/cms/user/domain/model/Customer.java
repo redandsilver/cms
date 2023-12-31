@@ -48,7 +48,7 @@ public class Customer extends BaseEntity{
                 .build();
     }
 
-    public Enum<UserStatus> isVerify() {
-        return this.verify;
+    public boolean isVerify() {
+        return this.verify.equals(UserStatus.VERIFIED);
     }
 }

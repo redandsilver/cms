@@ -2,8 +2,8 @@ package com.example.cms.user.application;
 
 import com.example.cms.user.domain.SignUpForm;
 import com.example.cms.user.domain.model.Customer;
-import com.example.cms.user.mailgun.MailgunClient;
-import com.example.cms.user.mailgun.SendMailForm;
+import com.example.cms.user.client.MailgunClient;
+import com.example.cms.user.client.mailgun.SendMailForm;
 import com.example.cms.user.service.SignUpCustomerService;
 import com.example.cms.user.exception.CustomException;
 import com.example.cms.user.exception.ErrorCode;

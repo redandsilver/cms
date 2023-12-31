@@ -1,4 +1,4 @@
-package com.example.cms.user.mailgun;
+package com.example.cms.user.client.mailgun;
 
 import lombok.*;
 
