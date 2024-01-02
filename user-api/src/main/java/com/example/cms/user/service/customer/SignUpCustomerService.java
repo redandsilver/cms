@@ -1,4 +1,4 @@
-package com.example.cms.user.service;
+package com.example.cms.user.service.customer;
 
 import com.example.cms.user.domain.SignUpForm;
 import com.example.cms.user.domain.model.Customer;
@@ -6,11 +6,10 @@ import com.example.cms.user.domain.repository.CustomerRepository;
 import com.example.cms.user.exception.CustomException;
 import com.example.cms.user.exception.ErrorCode;
 import com.example.cms.user.type.UserStatus;
-import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
@@ -41,19 +40,19 @@ public class SignUpCustomerService {
         else if(customer.getVerifyExpiredAt().isBefore(LocalDateTime.now())){
             throw new CustomException(ErrorCode.EXPIRE_CODE);
         }
-        customer.setVerify(UserStatus.VERIFIED);
+        customer.setVerify(true);
     }
     @Transactional
     public LocalDateTime changeCustomerValidateEmail(Long customerId, String verificationCode){
-        Optional <Customer> customerOptional= customerRepository.findById(customerId);
+        Optional<Customer> customerOptional= customerRepository.findById(customerId);
 
         if(customerOptional.isEmpty()){
             throw new CustomException(ErrorCode.NOT_EXIST_USER);
         }else{
-           Customer customer =  customerOptional.get();
-           customer.setVerificationCode(verificationCode);
-           customer.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
-           return customer.getVerifyExpiredAt();
+            Customer customer =  customerOptional.get();
+            customer.setVerificationCode(verificationCode);
+            customer.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
+            return customer.getVerifyExpiredAt();
         }
     }
 }
