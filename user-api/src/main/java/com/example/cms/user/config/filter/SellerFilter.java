@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/customer/*")
+@WebFilter(urlPatterns = "/seller/*")
 @RequiredArgsConstructor
 public class SellerFilter implements Filter {
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
