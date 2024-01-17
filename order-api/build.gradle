@@ -31,8 +31,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     testImplementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    testImplementation('it.ozimov:embeded-redis:0.7.3'){
-        exclude group:"org.slf4j", module:"slf4j-simple"
+    // embedded redis
+    implementation('it.ozimov:embedded-redis:0.7.3') {
+        exclude group: "org.slf4j", module: "slf4j-simple"
     }
     // to make random code
     implementation 'org.apache.commons:commons-lang3:3.12.0'
