@@ -3,6 +3,8 @@ package com.example.cms.order.service;
 import com.example.cms.order.domain.model.Product;
 import com.example.cms.order.domain.model.ProductItem;
 import com.example.cms.order.domain.product.AddProductItemForm;
+import com.example.cms.order.domain.product.UpdateProductForm;
+import com.example.cms.order.domain.product.UpdateProductItemForm;
 import com.example.cms.order.repository.ProductItemRepository;
 import com.example.cms.order.repository.ProductRepository;
 import com.example.cms.order.exception.CustomException;
@@ -28,5 +30,16 @@ public class ProductItemService {
         ProductItem productItem = ProductItem.of(sellerId,form);
         product.getProductItems().add(productItem);
         return product;
+    }
+
+    @Transactional
+    public ProductItem updateProductItem(Long sellerId, UpdateProductItemForm form){
+        ProductItem productItem = productItemRepository.findById(form.getId())
+                .filter(pi -> pi.getSellerId().equals(sellerId)).orElseThrow(
+                        () -> new CustomException(ErrorCode.NOT_FOUND_ITEM));
+        productItem.setName(form.getName());
+        productItem.setCount(form.getCount());
+        productItem.setPrice(form.getPrice());
+        return productItem;
     }
 }
