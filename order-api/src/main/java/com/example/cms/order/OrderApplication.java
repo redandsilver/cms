@@ -7,12 +7,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 @ServletComponentScan
+@EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 @EnableJpaAuditing
 @SpringBootApplication
 @EnableFeignClients
-@EnableJpaRepositories(repositoryBaseClass = EnversRevisionRepositoryFactoryBean.class)
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class,args);
