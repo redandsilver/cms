@@ -42,4 +42,10 @@ public class ProductItemService {
         productItem.setPrice(form.getPrice());
         return productItem;
     }
+
+    public void deleteProductItem(Long sellerId, Long productItemId){
+        ProductItem productItem = productItemRepository.findById(productItemId)
+                .filter(pi -> pi.getSellerId().equals(sellerId)).orElseThrow();
+        productItemRepository.delete(productItem);
+    }
 }
