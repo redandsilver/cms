@@ -40,4 +40,10 @@ public class ProductService {
         }
         return product;
     }
+
+    public void deleteProduct(Long sellerId, Long productId){
+        Product product = productRepository.findById(productId)
+                .filter(pi -> pi.getSellerId().equals(sellerId)).orElseThrow();
+        productRepository.delete(product);
+    }
 }
