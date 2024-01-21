@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.example.cms.order'
@@ -21,13 +22,15 @@ ext {
     set('springCloudVersion', "2021.0.3")
 }
 
+
+
 dependencies {
     implementation project(path: ":cms-domain",configuration: "default")
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation project(path: ':user-api')
-    implementation project(path: ':user-api')
+
     compileOnly 'org.projectlombok:lombok'
     testImplementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
@@ -35,6 +38,10 @@ dependencies {
     implementation('it.ozimov:embedded-redis:0.7.3') {
         exclude group: "org.slf4j", module: "slf4j-simple"
     }
+    // querydsl
+    implementation "com.querydsl:querydsl-jpa:5.0.0"
+    implementation "com.querydsl:querydsl-apt:5.0.0"
+
     // to make random code
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
@@ -51,6 +58,28 @@ dependencies {
 
     // swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+}
+
+// Qtype 생성 경로
+def querydslDir = "src/main/java/"
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslDefault = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
 }
 
 dependencyManagement {
